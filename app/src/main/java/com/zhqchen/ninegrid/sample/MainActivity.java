@@ -1,10 +1,12 @@
-package com.zhqchen.ninegrid;
+package com.zhqchen.ninegrid.sample;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.zhqchen.ninegrid.NineGridImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
