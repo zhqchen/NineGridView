@@ -20,7 +20,7 @@ import java.util.List;
  * Created by zhqchen on 2017-01-05.
  */
 public class NineGridImageView extends LinearLayout {
-    private int COLUMN_DEFAULT = 4;
+    private int COLUMN_DEFAULT = 3;
     private int SPACING_H_DEFAULT = 10;
     private int SPACING_V_DEFAULT = 10;
 
