@@ -20,14 +20,16 @@ import java.util.List;
  * Created by zhqchen on 2017-01-05.
  */
 public class NineGridImageView extends LinearLayout {
-    private int COLUMN_DEFAULT = 3;
-    private int SPACING_H_DEFAULT = 10;
-    private int SPACING_V_DEFAULT = 10;
+    private final int MAX_ITEM_COUNT = 9;
+    private final int COLUMN_DEFAULT = 3;
+    private final int SPACING_H_DEFAULT = 10;
+    private final int SPACING_V_DEFAULT = 10;
 
-    private int mItemWidth;
-    private int mColumns = COLUMN_DEFAULT;
-    private int hSpacing = SPACING_H_DEFAULT;
-    private int vSpacing = SPACING_V_DEFAULT;
+    private int mItemWidth;//每个item的宽度
+    private int maxItems;//item的最大数量
+    private int mColumns;//列数
+    private int hSpacing;//水平间距
+    private int vSpacing;//垂直间距
 
     private DataSetObserver observer;
     private NineGridAdapter mAdapter;//由上次使用者传入，可自定义item
@@ -46,7 +48,8 @@ public class NineGridImageView extends LinearLayout {
             return;
         }
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.NineGridIV);
-        mColumns = array.getInt(R.styleable.NineGridIV_numColumns, 0);
+        maxItems = array.getInt(R.styleable.NineGridIV_maxItems, MAX_ITEM_COUNT);
+        mColumns = array.getInt(R.styleable.NineGridIV_numColumns, COLUMN_DEFAULT);
         vSpacing = array.getDimensionPixelSize(R.styleable.NineGridIV_verticalSpacing, SPACING_V_DEFAULT);
         hSpacing = array.getDimensionPixelSize(R.styleable.NineGridIV_horizontalSpacing, SPACING_H_DEFAULT);
         array.recycle();
@@ -98,6 +101,10 @@ public class NineGridImageView extends LinearLayout {
         updateContentViews();
     }
 
+    public void setMaxItemCount(int itemCount) {
+        this.maxItems = itemCount;
+    }
+
     public void setColumns(int columns) {
         this.mColumns = columns;
     }
@@ -119,10 +126,13 @@ public class NineGridImageView extends LinearLayout {
     }
 
     private void updateContentViews() {
+        if(mColumns <= 0 || maxItems <= 0) {
+            throw new IllegalStateException("mColumns or maxItems can not <= 0");//配置异常
+        }
         if(mAdapter == null || mItemWidth <= 0) {
             return;
         }
-        int count = mAdapter.getCount();
+        int count = mAdapter.getCount() > maxItems ? maxItems : mAdapter.getCount();//限制最大展示数量
         int realRows = count / mColumns + (count % mColumns == 0 ? 0 : 1);
         LinkedList<LinearLayout> rowLayouts = new LinkedList<>();//行的父布局
         LinkedList<View> itemLayouts = new LinkedList<>();//item的父布局
@@ -187,7 +197,6 @@ public class NineGridImageView extends LinearLayout {
      */
     public static abstract class NineGridAdapter<T> extends BaseAdapter {
 
-        protected final int MAX_ITEM_SIZE = 9;
         protected Context context;
         protected List<T> itemDatas;
 
@@ -198,7 +207,7 @@ public class NineGridImageView extends LinearLayout {
 
         @Override
         public int getCount() {
-            return itemDatas.size() > MAX_ITEM_SIZE ? MAX_ITEM_SIZE: itemDatas.size();
+            return itemDatas.size();
         }
 
         @Override

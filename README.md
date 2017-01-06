@@ -5,6 +5,7 @@
 
 ###配置项：
 ```
+    maxItems:最大item数量, 默认为9
     numColumns: 网格的列数，默认为3
     verticalSpacing: 垂直方向的网格间隔
     horizontalSpacing: 水平方向的网格间隔
@@ -18,7 +19,6 @@
             android:id="@+id/ngv_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:numColumns="4"
             app:verticalSpacing="4dp"
             app:horizontalSpacing="4dp"/>
 ~~~

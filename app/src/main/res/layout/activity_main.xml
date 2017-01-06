@@ -11,7 +11,6 @@
         android:id="@+id/ngv_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:numColumns="4"
         app:verticalSpacing="4dp"
         app:horizontalSpacing="4dp"/>
 </LinearLayout>

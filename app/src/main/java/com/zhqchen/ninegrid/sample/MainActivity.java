@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal,
+                R.mipmap.app_btn_camera_normal,
+                R.mipmap.app_btn_camera_normal,
+                R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal
         ));
         mAdapter = new MyGridAdapter(this, itemDatas);
