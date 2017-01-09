@@ -1,4 +1,4 @@
-# NineGridImageView
+# NineGridView
 九宫格布局，普通View实现，可像使用GridView一样设置Adapter，类似于微博的网格图片布局。
 
 ![](./screenshots/nine_grid.png)
@@ -14,7 +14,7 @@
 ### 使用
 #### 1. 在布局中加入组件:
 ~~~xml
-    <com.zhqchen.ninegrid.NineGridImageView
+    <com.zhqchen.ninegrid.NineGrideView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/ngv_test"
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@ ngvTest.setAdapter(mAdapter);
 ~~~
 here is the sample code
 ~~~java
-public class MyGridAdapter extends NineGridImageView.NineGridAdapter<Integer> {
+public class MyGridAdapter extends NineGrideView.NineGridAdapter<Integer> {
 
         public MyGridAdapter(Context context, List<Integer> itemDatas) {
             super(context, itemDatas);
