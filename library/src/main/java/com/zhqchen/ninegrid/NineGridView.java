@@ -16,10 +16,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 九宫格View
+ * 九宫格View, 主要用来展示图片，也可用于自定义的itemView
  * Created by zhqchen on 2017-01-05.
  */
-public class NineGridImageView extends LinearLayout {
+public class NineGridView extends LinearLayout {
     private final int MAX_ITEM_COUNT = 9;
     private final int COLUMN_DEFAULT = 3;
     private final int SPACING_H_DEFAULT = 10;
@@ -34,11 +34,11 @@ public class NineGridImageView extends LinearLayout {
     private DataSetObserver observer;
     private NineGridAdapter mAdapter;//由上次使用者传入，可自定义item
 
-    public NineGridImageView(Context context) {
+    public NineGridView(Context context) {
         this(context, null);
     }
 
-    public NineGridImageView(Context context, AttributeSet attrs) {
+    public NineGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initViews(context, attrs);
     }

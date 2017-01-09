@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.zhqchen.ninegrid.NineGridImageView;
+import com.zhqchen.ninegrid.NineGridView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,16 +14,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    NineGridImageView ngvTest;
+    NineGridView ngvTest;
 
     private List<Integer> itemDatas;
-    private NineGridImageView.NineGridAdapter mAdapter;
+    private NineGridView.NineGridAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ngvTest = (NineGridImageView) findViewById(R.id.ngv_test);
+        ngvTest = (NineGridView) findViewById(R.id.ngv_test);
         initViews();
     }
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public class MyGridAdapter extends NineGridImageView.NineGridAdapter<Integer> {
+    public class MyGridAdapter extends NineGridView.NineGridAdapter<Integer> {
 
         public MyGridAdapter(Context context, List<Integer> itemDatas) {
             super(context, itemDatas);
