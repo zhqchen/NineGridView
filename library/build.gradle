@@ -30,7 +30,7 @@ dependencies {
 }
 
 publish {
-    userOrg = 'zhq078'//bintray.com的组织名称
+    userOrg = 'zhqchen'//bintray.com的组织名称
     groupId = 'com.zhqchen'//jcenter上的路径
     artifactId = 'ninegridview'//项目名称
     publishVersion = '1.0.0'//版本号
