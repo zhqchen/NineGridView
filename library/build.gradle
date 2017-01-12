@@ -31,7 +31,7 @@ dependencies {
 
 publish {
     userOrg = 'zhqchen'//bintray.com的组织名称
-    groupId = 'com.zhqchen'//jcenter上的路径
+    groupId = 'cn.zhqchen'//jcenter上的路径
     artifactId = 'ninegridview'//项目名称
     publishVersion = '1.0.0'//版本号
     desc = 'Android NineGridView use like GridView'//描述

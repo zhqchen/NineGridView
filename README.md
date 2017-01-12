@@ -3,11 +3,6 @@
 
 ![](./screenshots/nine_grid.png)
 
-### gradle引入
-```
-    compile 'com.zhqchen:ninegridview:1.0.0'
-```
-
 ### 配置项
 ```
     maxItems:最大item数量, 默认为9

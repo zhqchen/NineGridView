@@ -1,4 +1,4 @@
-package com.zhqchen.ninegrid.sample;
+package cn.zhqchen.ninegrid.sample;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.zhqchen.ninegrid.NineGridView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import cn.zhqchen.ninegrid.NineGridView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal,
-                R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal
         ));
+
         mAdapter = new MyGridAdapter(this, itemDatas);
         ngvTest.setAdapter(mAdapter);
     }

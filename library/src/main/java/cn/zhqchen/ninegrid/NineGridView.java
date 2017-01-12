@@ -1,4 +1,4 @@
-package com.zhqchen.ninegrid;
+package cn.zhqchen.ninegrid;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ¾Å¹¬¸ñView, Ö÷ÒªÓÃÀ´Õ¹Ê¾Í¼Æ¬£¬Ò²¿ÉÓÃÓÚ×Ô¶¨ÒåµÄitemView
+ * ä¹å®«æ ¼View, ä¸»è¦ç”¨æ¥å±•ç¤ºå›¾ç‰‡ï¼Œä¹Ÿå¯ç”¨äºè‡ªå®šä¹‰çš„itemView
  * Created by zhqchen on 2017-01-05.
  */
 public class NineGridView extends LinearLayout {
@@ -25,14 +25,14 @@ public class NineGridView extends LinearLayout {
     private final int SPACING_H_DEFAULT = 10;
     private final int SPACING_V_DEFAULT = 10;
 
-    private int mItemWidth;//Ã¿¸öitemµÄ¿í¶È
-    private int maxItems;//itemµÄ×î´óÊıÁ¿
-    private int mColumns;//ÁĞÊı
-    private int hSpacing;//Ë®Æ½¼ä¾à
-    private int vSpacing;//´¹Ö±¼ä¾à
+    private int mItemWidth;//æ¯ä¸ªitemçš„å®½åº¦
+    private int maxItems;//itemçš„æœ€å¤§æ•°é‡
+    private int mColumns;//åˆ—æ•°
+    private int hSpacing;//æ°´å¹³é—´è·
+    private int vSpacing;//å‚ç›´é—´è·
 
     private DataSetObserver observer;
-    private NineGridAdapter mAdapter;//ÓÉÉÏ´ÎÊ¹ÓÃÕß´«Èë£¬¿É×Ô¶¨Òåitem
+    private NineGridAdapter mAdapter;//ç”±ä¸Šæ¬¡ä½¿ç”¨è€…ä¼ å…¥ï¼Œå¯è‡ªå®šä¹‰item
 
     public NineGridView(Context context) {
         this(context, null);
@@ -58,7 +58,7 @@ public class NineGridView extends LinearLayout {
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         initItemWidth();
 
-        //ÔÚmAdapterµÄnotifyDataSetChangedºó£¬¹Û²ìÕßÒ²»áÔËĞĞonChanged
+        //åœ¨mAdapterçš„notifyDataSetChangedåï¼Œè§‚å¯Ÿè€…ä¹Ÿä¼šè¿è¡ŒonChanged
         observer = new DataSetObserver() {
             @Override
             public void onChanged() {
@@ -73,7 +73,7 @@ public class NineGridView extends LinearLayout {
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if (mItemWidth <= 0) {//¼ÆËãitemµÄ¿í¶È
+                if (mItemWidth <= 0) {//è®¡ç®—itemçš„å®½åº¦
                     mItemWidth = (getMeasuredWidth() - (mColumns - 1) * hSpacing - getPaddingLeft() - getPaddingRight()) / mColumns;
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -97,7 +97,7 @@ public class NineGridView extends LinearLayout {
             this.mAdapter.unregisterDataSetObserver(observer);
         }
         this.mAdapter = adapter;
-        this.mAdapter.registerDataSetObserver(observer);//×¢²á¹Û²ìÕß
+        this.mAdapter.registerDataSetObserver(observer);//æ³¨å†Œè§‚å¯Ÿè€…
         updateContentViews();
     }
 
@@ -127,31 +127,31 @@ public class NineGridView extends LinearLayout {
 
     private void updateContentViews() {
         if(mColumns <= 0 || maxItems <= 0) {
-            throw new IllegalStateException("mColumns or maxItems can not <= 0");//ÅäÖÃÒì³£
+            throw new IllegalStateException("mColumns or maxItems can not <= 0");//é…ç½®å¼‚å¸¸
         }
         if(mAdapter == null || mItemWidth <= 0) {
             return;
         }
-        int count = mAdapter.getCount() > maxItems ? maxItems : mAdapter.getCount();//ÏŞÖÆ×î´óÕ¹Ê¾ÊıÁ¿
+        int count = mAdapter.getCount() > maxItems ? maxItems : mAdapter.getCount();//é™åˆ¶æœ€å¤§å±•ç¤ºæ•°é‡
         int realRows = count / mColumns + (count % mColumns == 0 ? 0 : 1);
-        LinkedList<LinearLayout> rowLayouts = new LinkedList<>();//ĞĞµÄ¸¸²¼¾Ö
-        LinkedList<View> itemLayouts = new LinkedList<>();//itemµÄ¸¸²¼¾Ö
+        LinkedList<LinearLayout> rowLayouts = new LinkedList<>();//è¡Œçš„çˆ¶å¸ƒå±€
+        LinkedList<View> itemLayouts = new LinkedList<>();//itemçš„çˆ¶å¸ƒå±€
         for(int i = 0; i < getChildCount(); i++) {
             LinearLayout rowLayout = (LinearLayout) getChildAt(i);
             rowLayouts.add(rowLayout);
             for(int j = 0; j < rowLayout.getChildCount(); j++) {
                 itemLayouts.add(rowLayout.getChildAt(j));
             }
-            rowLayout.removeAllViews();//Çå³ıÒ»ĞĞÀïµÄitemViews
+            rowLayout.removeAllViews();//æ¸…é™¤ä¸€è¡Œé‡Œçš„itemViews
         }
-        removeAllViews();//Çå³ıËùÓĞĞĞ¸¸²¼¾Ö
+        removeAllViews();//æ¸…é™¤æ‰€æœ‰è¡Œçˆ¶å¸ƒå±€
 
         int row = -1;
         LinearLayout rowTempLayout = null;
         ViewGroup.LayoutParams params;
         LayoutParams itemParams;
         for(int position = 0; position < count; position++) {
-            View itemView = mAdapter.initViewHolder(itemLayouts.poll());//´´½¨»ò¸´ÓÃitemView
+            View itemView = mAdapter.initViewHolder(itemLayouts.poll());//åˆ›å»ºæˆ–å¤ç”¨itemView
             params = itemView.getLayoutParams();
             if(params  != null && params instanceof LayoutParams) {
                 itemParams = (LayoutParams) params;
@@ -160,23 +160,23 @@ public class NineGridView extends LinearLayout {
             } else {
                 itemParams = new LayoutParams(mItemWidth, mItemWidth);
             }
-            itemView.setLayoutParams(itemParams);//ÖØĞÂÉèÖÃitemµÄLayoutParam
+            itemView.setLayoutParams(itemParams);//é‡æ–°è®¾ç½®itemçš„LayoutParam
 
-            if(position % mColumns == 0) {//Ã¿Ò»ĞĞµÄÆğµã
+            if(position % mColumns == 0) {//æ¯ä¸€è¡Œçš„èµ·ç‚¹
                 row++;
                 itemParams.leftMargin = 0;
                 rowTempLayout = generateRowLayout(rowLayouts.poll());
                 addView(rowTempLayout);
             } else {
                 if(rowTempLayout == null) {
-                    rowTempLayout = generateRowLayout(rowLayouts.poll());//Êµ¼Ê²»»á×ßµ½ÕâÀï
+                    rowTempLayout = generateRowLayout(rowLayouts.poll());//å®é™…ä¸ä¼šèµ°åˆ°è¿™é‡Œ
                 }
                 itemParams.leftMargin = hSpacing;
             }
-            itemParams.topMargin = row == 0 ? 0 : vSpacing / 2;//µÚÒ»ĞĞ²»ÉèÖÃtopMargin
-            itemParams.bottomMargin = row == realRows - 1 ? 0 : vSpacing /2;//×îºóÒ»ĞĞ²»ÉèÖÃbottomMargin
+            itemParams.topMargin = row == 0 ? 0 : vSpacing / 2;//ç¬¬ä¸€è¡Œä¸è®¾ç½®topMargin
+            itemParams.bottomMargin = row == realRows - 1 ? 0 : vSpacing /2;//æœ€åä¸€è¡Œä¸è®¾ç½®bottomMargin
             rowTempLayout.addView(itemView);
-            mAdapter.bindData(itemView, position);//ÔÚÉèÖÃºÃparamsÖ®ºó£¬°ó¶¨Êı¾İ
+            mAdapter.bindData(itemView, position);//åœ¨è®¾ç½®å¥½paramsä¹‹åï¼Œç»‘å®šæ•°æ®
         }
         rowLayouts.clear();
         itemLayouts.clear();
@@ -192,7 +192,7 @@ public class NineGridView extends LinearLayout {
     }
 
     /**
-     * ²âÊÔNineGridImageViewµÄÊÊÅäÆ÷
+     * æµ‹è¯•NineGridImageViewçš„é€‚é…å™¨
      * Created by pa_zhiqiang on 2017-01-05.
      */
     public static abstract class NineGridAdapter<T> extends BaseAdapter {
@@ -220,21 +220,21 @@ public class NineGridView extends LinearLayout {
             return position;
         }
 
-        //×ÓÀà²»ÓÃÖØĞ´Õâ¸ö·½·¨£¬ÓÉinitViewHolder´úÌæ
+        //å­ç±»ä¸ç”¨é‡å†™è¿™ä¸ªæ–¹æ³•ï¼Œç”±initViewHolderä»£æ›¿
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             return initViewHolder(convertView);
         }
 
         /**
-         * ´´½¨/¸´ÓÃitemView
+         * åˆ›å»º/å¤ç”¨itemView
          * @param convertView
          * @return
          */
         protected abstract View initViewHolder(View convertView);
 
         /**
-         * °ó¶¨itemµÄÊı¾İ
+         * ç»‘å®šitemçš„æ•°æ®
          * @param convertView
          * @param position
          */

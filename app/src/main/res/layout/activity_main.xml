@@ -6,7 +6,7 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
-    <com.zhqchen.ninegrid.NineGridView
+    <cn.zhqchen.ninegrid.NineGridView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ngv_test"
         android:layout_width="match_parent"
