@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release' // must be applied after your artifact generating plugin (eg. java / com.android.library)
 
-version = "1.0.0"
-
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -11,7 +9,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
     }
     buildTypes {
         release {
@@ -31,9 +29,9 @@ dependencies {
 
 publish {
     userOrg = 'zhqchen'//bintray.com的组织名称
-    groupId = 'cn.zhqchen'//jcenter上的路径
+    groupId = 'com.zhqchen'//jcenter上的路径
     artifactId = 'ninegridview'//项目名称
-    publishVersion = '1.0.0'//版本号
+    publishVersion = '1.0.1'//版本号
     desc = 'Android NineGridView use like GridView'//描述
     website = 'https://github.com/zhqchen/NineGridView'
 }
