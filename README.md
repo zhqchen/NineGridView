@@ -5,7 +5,7 @@
 
 ### gradle引入
 ```
-    compile 'com.zhqchen:ninegridview:1.0.0'
+    compile 'com.zhqchen:ninegridview:1.0.1'
 ```
 
 ### 配置项

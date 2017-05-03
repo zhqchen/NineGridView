@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.zhqchen.ninegrid.NineGridView;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected View initViewHolder(View convertView) {
+        protected View initViewHolder(View convertView, ViewGroup parent) {
             if(convertView == null) {
                 convertView = new ImageView(context);//自定义Layout
             }

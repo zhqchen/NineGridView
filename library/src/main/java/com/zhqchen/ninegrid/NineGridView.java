@@ -101,6 +101,10 @@ public class NineGridView extends LinearLayout {
         updateContentViews();
     }
 
+    public NineGridAdapter getAdapter() {
+        return this.mAdapter;
+    }
+
     public void setMaxItemCount(int itemCount) {
         this.maxItems = itemCount;
     }
@@ -151,7 +155,7 @@ public class NineGridView extends LinearLayout {
         ViewGroup.LayoutParams params;
         LayoutParams itemParams;
         for(int position = 0; position < count; position++) {
-            View itemView = mAdapter.initViewHolder(itemLayouts.poll());//创建或复用itemView
+            View itemView = mAdapter.initViewHolder(itemLayouts.poll(), rowLayouts.poll());//创建或复用itemView
             params = itemView.getLayoutParams();
             if(params  != null && params instanceof LayoutParams) {
                 itemParams = (LayoutParams) params;
@@ -223,7 +227,7 @@ public class NineGridView extends LinearLayout {
         //子类不用重写这个方法，由initViewHolder代替
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            return initViewHolder(convertView);
+            return initViewHolder(convertView, parent);
         }
 
         /**
@@ -231,7 +235,7 @@ public class NineGridView extends LinearLayout {
          * @param convertView
          * @return
          */
-        protected abstract View initViewHolder(View convertView);
+        protected abstract View initViewHolder(View convertView, ViewGroup parent);
 
         /**
          * 绑定item的数据
