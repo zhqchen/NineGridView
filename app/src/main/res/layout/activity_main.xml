@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.zhqchen.ninegrid.NineGridView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ngv_test"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:verticalSpacing="4dp"
-        app:horizontalSpacing="4dp"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <com.zhqchen.ninegrid.NineGridView
+            android:id="@+id/ngv_test"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:horizontalSpacing="4dp"
+            app:verticalSpacing="4dp"/>
+    </LinearLayout>
+</ScrollView>

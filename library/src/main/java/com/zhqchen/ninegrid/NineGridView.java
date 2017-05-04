@@ -160,9 +160,9 @@ public class NineGridView extends LinearLayout {
             if(params  != null && params instanceof LayoutParams) {
                 itemParams = (LayoutParams) params;
                 itemParams.width = mItemWidth;
-                itemParams.height = mItemWidth;
+                itemParams.height = mColumns == 1 ? LayoutParams.WRAP_CONTENT : mItemWidth;//只有一列时，认为它类似于ListView，去自适应高度
             } else {
-                itemParams = new LayoutParams(mItemWidth, mItemWidth);
+                itemParams = new LayoutParams(mItemWidth, mColumns == 1 ? LayoutParams.WRAP_CONTENT : mItemWidth);
             }
             itemView.setLayoutParams(itemParams);//重新设置item的LayoutParam
 
