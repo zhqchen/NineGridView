@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 R.mipmap.app_btn_camera_normal
         ));
 
+        ngvTest.setVisibility(View.VISIBLE);
         mAdapter = new MyGridAdapter(this, itemDatas);
         ngvTest.setAdapter(mAdapter);
     }

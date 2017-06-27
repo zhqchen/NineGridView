@@ -133,6 +133,9 @@ public class NineGridView extends LinearLayout {
         if(mColumns <= 0 || maxItems <= 0) {
             throw new IllegalStateException("mColumns or maxItems can not <= 0");//配置异常
         }
+        if (mItemWidth <= 0) {//在计算item的宽度
+            mItemWidth = (getMeasuredWidth() - (mColumns - 1) * hSpacing - getPaddingLeft() - getPaddingRight()) / mColumns;
+        }
         if(mAdapter == null || mItemWidth <= 0) {
             return;
         }

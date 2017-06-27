@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:horizontalSpacing="4dp"
-            app:verticalSpacing="4dp"/>
+            app:verticalSpacing="4dp"
+            android:visibility="gone"/>
     </LinearLayout>
 </ScrollView>
