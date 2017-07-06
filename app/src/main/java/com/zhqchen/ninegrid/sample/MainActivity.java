@@ -2,10 +2,12 @@ package com.zhqchen.ninegrid.sample;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.zhqchen.ninegrid.NineGridView;
 
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     NineGridView ngvTest;
 
+    LinearLayout ll_test;
+
     private List<Integer> itemDatas;
     private NineGridView.NineGridAdapter mAdapter;
 
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ngvTest = (NineGridView) findViewById(R.id.ngv_test);
+        ll_test = (LinearLayout) findViewById(R.id.ll_test);
         initViews();
     }
 
@@ -38,14 +43,17 @@ public class MainActivity extends AppCompatActivity {
                 R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal,
-                R.mipmap.app_btn_camera_normal,
-                R.mipmap.app_btn_camera_normal,
                 R.mipmap.app_btn_camera_normal
         ));
 
-        ngvTest.setVisibility(View.VISIBLE);
-        mAdapter = new MyGridAdapter(this, itemDatas);
-        ngvTest.setAdapter(mAdapter);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ngvTest.setVisibility(View.VISIBLE);
+                mAdapter = new MyGridAdapter(MainActivity.this, itemDatas);
+                ngvTest.setAdapter(mAdapter);
+            }
+        }, 2000);
     }
 
     @Override
