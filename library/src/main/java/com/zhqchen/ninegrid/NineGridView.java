@@ -68,6 +68,9 @@ public class NineGridView extends LinearLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        if(mColumns <= 0 || maxItems <= 0) {
+            return;
+        }
         if (mItemWidth <= 0) {//在NineGridView初始设置为gone时，普通方法无法获取宽度，因此在这儿添加 计算item的宽度的逻辑
             mItemWidth = (getMeasuredWidth() - (mColumns - 1) * hSpacing - getPaddingLeft() - getPaddingRight()) / mColumns;
             updateContentViews();

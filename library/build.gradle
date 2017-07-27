@@ -9,7 +9,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0.4"
+        versionName "1.0.5"
     }
     buildTypes {
         release {
@@ -31,7 +31,7 @@ publish {
     userOrg = 'zhqchen'//bintray.com的组织名称
     groupId = 'com.zhqchen'//jcenter上的路径
     artifactId = 'ninegridview'//项目名称
-    publishVersion = '1.0.4'//版本号
+    publishVersion = '1.0.5'//版本号
     desc = 'Android NineGridView use like GridView'//描述
     website = 'https://github.com/zhqchen/NineGridView'
 }
