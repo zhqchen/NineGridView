@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ngvTest.setVisibility(View.VISIBLE);
                 mAdapter = new MyGridAdapter(MainActivity.this, itemDatas);
                 ngvTest.setAdapter(mAdapter);
             }

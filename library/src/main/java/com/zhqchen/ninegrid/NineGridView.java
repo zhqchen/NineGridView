@@ -3,10 +3,12 @@ package com.zhqchen.ninegrid;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
@@ -54,6 +56,7 @@ public class NineGridView extends LinearLayout {
         setGravity(Gravity.CENTER_VERTICAL);
         setOrientation(LinearLayout.VERTICAL);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        initItemWidth();
 
         //在mAdapter的notifyDataSetChanged后，观察者也会运行onChanged
         observer = new DataSetObserver() {
@@ -65,16 +68,22 @@ public class NineGridView extends LinearLayout {
         };
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if(mColumns <= 0 || maxItems <= 0) {
-            return;
-        }
-        if (mItemWidth <= 0) {//在NineGridView初始设置为gone时，普通方法无法获取宽度，因此在这儿添加 计算item的宽度的逻辑
-            mItemWidth = (getMeasuredWidth() - (mColumns - 1) * hSpacing - getPaddingLeft() - getPaddingRight()) / mColumns;
-            updateContentViews();
-        }
+    private void initItemWidth() {
+        final ViewTreeObserver viewTreeObserver = getViewTreeObserver();
+        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (mItemWidth <= 0) {//计算item的宽度
+                    mItemWidth = (getMeasuredWidth() - (mColumns - 1) * hSpacing - getPaddingLeft() - getPaddingRight()) / mColumns;
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+                updateContentViews();
+            }
+        });
     }
 
     public void setAdapter(NineGridAdapter adapter) {
@@ -89,6 +98,7 @@ public class NineGridView extends LinearLayout {
         }
         this.mAdapter = adapter;
         this.mAdapter.registerDataSetObserver(observer);//注册观察者
+        updateContentViews();
     }
 
     public NineGridAdapter getAdapter() {
@@ -122,6 +132,9 @@ public class NineGridView extends LinearLayout {
     private void updateContentViews() {
         if(mColumns <= 0 || maxItems <= 0) {
             throw new IllegalStateException("mColumns or maxItems can not <= 0");//配置异常
+        }
+        if (mItemWidth <= 0) {//在计算item的宽度
+            mItemWidth = (getMeasuredWidth() - (mColumns - 1) * hSpacing - getPaddingLeft() - getPaddingRight()) / mColumns;
         }
         if(mAdapter == null || mItemWidth <= 0) {
             return;
