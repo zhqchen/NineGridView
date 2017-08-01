@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 mAdapter = new MyGridAdapter(MainActivity.this, itemDatas);
                 ngvTest.setAdapter(mAdapter);
+                ngvTest.setVisibility(View.VISIBLE);
             }
         }, 2000);
     }
