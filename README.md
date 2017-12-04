@@ -5,12 +5,13 @@
 
 ### gradle引入
 ```
-    compile 'com.zhqchen:ninegridview:1.1.0'
+    compile 'com.zhqchen:ninegridview:1.1.1'
 ```
 
 ### 配置项
 ```
-    maxItems:最大item数量, 默认为9
+    isHeightWrap: item高度是否自适应。true: 高度自适应， false: item的宽高一致
+    maxItems: 最大item数量, 默认为9
     numColumns: 网格的列数，默认为3
     verticalSpacing: 垂直方向的网格间隔
     horizontalSpacing: 水平方向的网格间隔

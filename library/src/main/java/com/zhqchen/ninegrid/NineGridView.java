@@ -28,6 +28,7 @@ public class NineGridView extends LinearLayout {
     private int mColumns;//列数
     private int hSpacing;//水平间距
     private int vSpacing;//垂直间距
+    private boolean isHeightWrap;//item高度是否自适应布局
 
     private DataSetObserver observer;
     private NineGridAdapter mAdapter;//由上次使用者传入，可自定义item
@@ -45,11 +46,12 @@ public class NineGridView extends LinearLayout {
         if(isInEditMode()) {
             return;
         }
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.NineGridIV);
-        maxItems = array.getInt(R.styleable.NineGridIV_maxItems, MAX_ITEM_COUNT);
-        mColumns = array.getInt(R.styleable.NineGridIV_numColumns, COLUMN_DEFAULT);
-        vSpacing = array.getDimensionPixelSize(R.styleable.NineGridIV_verticalSpacing, SPACING_V_DEFAULT);
-        hSpacing = array.getDimensionPixelSize(R.styleable.NineGridIV_horizontalSpacing, SPACING_H_DEFAULT);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.NineGridView);
+        maxItems = array.getInt(R.styleable.NineGridView_maxItems, MAX_ITEM_COUNT);
+        mColumns = array.getInt(R.styleable.NineGridView_numColumns, COLUMN_DEFAULT);
+        vSpacing = array.getDimensionPixelSize(R.styleable.NineGridView_verticalSpacing, SPACING_V_DEFAULT);
+        hSpacing = array.getDimensionPixelSize(R.styleable.NineGridView_horizontalSpacing, SPACING_H_DEFAULT);
+        isHeightWrap = array.getBoolean(R.styleable.NineGridView_isHeightWrap, false);
         array.recycle();
         setGravity(Gravity.CENTER_VERTICAL);
         setOrientation(LinearLayout.VERTICAL);
@@ -122,6 +124,10 @@ public class NineGridView extends LinearLayout {
         this.hSpacing = spacing;
     }
 
+    public void setIsHeightWrap(boolean isHeightWrap) {
+        this.isHeightWrap = isHeightWrap;
+    }
+
     public void recycle() {
         if(mAdapter != null) {
             mAdapter.unregisterDataSetObserver(observer);
@@ -161,9 +167,9 @@ public class NineGridView extends LinearLayout {
             if(params  != null && params instanceof LayoutParams) {
                 itemParams = (LayoutParams) params;
                 itemParams.width = mItemWidth;
-                itemParams.height = mColumns == 1 ? LayoutParams.WRAP_CONTENT : mItemWidth;//只有一列时，认为它类似于ListView，去自适应高度
+                itemParams.height = isHeightWrap || mColumns ==1 ? LayoutParams.WRAP_CONTENT : mItemWidth;//只有一列时，认为它类似于ListView，去自适应高度
             } else {
-                itemParams = new LayoutParams(mItemWidth, mColumns == 1 ? LayoutParams.WRAP_CONTENT : mItemWidth);
+                itemParams = new LayoutParams(mItemWidth, isHeightWrap || mColumns == 1 ? LayoutParams.WRAP_CONTENT : mItemWidth);
             }
             itemView.setLayoutParams(itemParams);//重新设置item的LayoutParam
 

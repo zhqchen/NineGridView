@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="NineGridIV">
+    <declare-styleable name="NineGridView">
         <attr name="maxItems" format="integer"/><!--最大item数量, 默认为9 -->
         <attr name="numColumns" format="integer"/><!--列数 -->
         <attr name="verticalSpacing" format="dimension"/><!--垂直间距 -->
         <attr name="horizontalSpacing" format="dimension"/><!--水平间距 -->
+        <attr name="isHeightWrap" format="boolean" /><!--item高度是否自适应布局-->
     </declare-styleable>
 </resources>
